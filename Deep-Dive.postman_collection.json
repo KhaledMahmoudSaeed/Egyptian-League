@@ -1,0 +1,291 @@
+{
+	"info": {
+		"_postman_id": "eb2a0005-1ea8-4523-87aa-8db700e6f95a",
+		"name": "Deep Dive",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38198337"
+	},
+	"item": [
+		{
+			"name": "Task_4",
+			"item": [
+				{
+					"name": "Teams",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{deep_dive_url}}/teams",
+									"host": [
+										"{{deep_dive_url}}"
+									],
+									"path": [
+										"teams"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{deep_dive_url}}/teams/68a7777382f417d2d9719851",
+									"host": [
+										"{{deep_dive_url}}"
+									],
+									"path": [
+										"teams",
+										"68a7777382f417d2d9719851"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "store",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Al Ahly SC\",\r\n  \"city\": \"Cairo\",\r\n  \"stadium\": \"Cairo International Stadium\",\r\n  \"foundedYear\": \"1907-04-24\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{deep_dive_url}}/teams",
+									"host": [
+										"{{deep_dive_url}}"
+									],
+									"path": [
+										"teams"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Liverpoll\",\r\n  \"city\": \"england\",\r\n  \"stadium\": \"Anfield\",\r\n  \"foundedYear\": \"1902-04-24\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{deep_dive_url}}/teams/68a7777382f417d2d9719851",
+									"host": [
+										"{{deep_dive_url}}"
+									],
+									"path": [
+										"teams",
+										"68a7777382f417d2d9719851"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{deep_dive_url}}/teams/68a7777382f417d2d9719851",
+									"host": [
+										"{{deep_dive_url}}"
+									],
+									"path": [
+										"teams",
+										"68a7777382f417d2d9719851"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Match",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{deep_dive_url}}/matches",
+									"host": [
+										"{{deep_dive_url}}"
+									],
+									"path": [
+										"matches"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{deep_dive_url}}/matches/68a77cdfde183021052cd0b1",
+									"host": [
+										"{{deep_dive_url}}"
+									],
+									"path": [
+										"matches",
+										"68a77cdfde183021052cd0b1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "store",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"homeTeam\": \"68a7777382f417d2d9719851\",\r\n  \"awayTeam\": \"68a7782b09dd40423f932b46\",\r\n  \"matchDate\": \"2025-08-21\",\r\n  \"score\": \"2-1\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{deep_dive_url}}/matches",
+									"host": [
+										"{{deep_dive_url}}"
+									],
+									"path": [
+										"matches"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Liverpoll\",\r\n  \"city\": \"england\",\r\n  \"stadium\": \"Anfield\",\r\n  \"foundedYear\": \"1902-04-24\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{deep_dive_url}}/matches/68a77cdfde183021052cd0b1",
+									"host": [
+										"{{deep_dive_url}}"
+									],
+									"path": [
+										"matches",
+										"68a77cdfde183021052cd0b1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{deep_dive_url}}/matches/68a77cdfde183021052cd0b1",
+									"host": [
+										"{{deep_dive_url}}"
+									],
+									"path": [
+										"matches",
+										"68a77cdfde183021052cd0b1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
