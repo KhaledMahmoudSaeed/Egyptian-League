@@ -1,3 +1,11 @@
+import Joi from "joi";
+
+const matchSchema = Joi.object({
+  homeTeam: Joi.string().required(),
+  awayTeam: Joi.string().required(),
+  matchDate: Joi.date().required(),
+  score: Joi.string().required(),
+});
 import MATCH from "../models/match.model.js";
 import { SUCCESS, FAIL } from "../utilities/successWords.js";
 import { errorHandler } from "../utilities/errorHandler.js";
@@ -54,13 +62,12 @@ export const show = asyncWarper(async (req, res, next) => {
 });
 
 export const store = asyncWarper(async (req, res, next) => {
-  const { homeTeam, awayTeam, matchDate, score } = req.body;
-  if (!homeTeam || !awayTeam || !date || !score) {
-    return next(
-      errorHandler.create("Missing required match fields", FAIL, 400)
-    );
+  const { error, value } = matchSchema.validate(req.body);
+  if (error) {
+    return next(errorHandler.create(error.details[0].message, FAIL, 400));
   }
-  const invaildmatchdate = new Date(matchDate) > now();
+  const { homeTeam, awayTeam, matchDate, score } = value;
+  const invaildmatchdate = new Date(matchDate) > new Date();
   if (invaildmatchdate) {
     return next(errorHandler.create("Invalid match date", FAIL, 400));
   }
@@ -76,8 +83,12 @@ export const store = asyncWarper(async (req, res, next) => {
 
 export const update = asyncWarper(async (req, res, next) => {
   const matchId = req.params.matchId;
-  const { homeTeam, awayTeam, matchDate, score } = req.body;
-  const invaildmatchdate = new Date(matchDate) > now();
+  const { error, value } = matchSchema.validate(req.body);
+  if (error) {
+    return next(errorHandler.create(error.details[0].message, FAIL, 400));
+  }
+  const { homeTeam, awayTeam, matchDate, score } = value;
+  const invaildmatchdate = new Date(matchDate) > new Date();
   if (invaildmatchdate) {
     return next(errorHandler.create("Invalid match date", FAIL, 400));
   }
