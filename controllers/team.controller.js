@@ -1,4 +1,9 @@
 import Joi from "joi";
+import TEAM from "../models/team.model.js";
+import { SUCCESS, FAIL } from "../utilities/successWords.js";
+import { errorHandler } from "../utilities/errorHandler.js";
+import { asyncWarper } from "../middleware/asyncWrapper.js";
+import { now } from "mongoose";
 
 const teamSchema = Joi.object({
   name: Joi.string().min(3).max(50).required(),
@@ -6,12 +11,6 @@ const teamSchema = Joi.object({
   stadium: Joi.string().min(3).max(100).required(),
   foundedYear: Joi.date().required(),
 });
-import TEAM from "../models/team.model.js";
-import { SUCCESS, FAIL } from "../utilities/successWords.js";
-import { errorHandler } from "../utilities/errorHandler.js";
-import { asyncWarper } from "../middleware/asyncWrapper.js";
-import { now } from "mongoose";
-
 export const index = asyncWarper(async (req, res, next) => {
   const limit = 3;
   const page = req.query.page || 1;

@@ -6,12 +6,14 @@ import {
   update,
   destroy,
 } from "../controllers/team.controller.js";
+import { auth } from "../middleware/auth.js";
+
 const router = express.Router();
 
 router.get("/", index);
 router.get("/:teamId", show);
-router.post("/", store);
-router.put("/:teamId", update);
-router.delete("/:teamId", destroy);
+router.post("/", auth, store);
+router.put("/:teamId", auth, update);
+router.delete("/:teamId", auth, destroy);
 
 export default router;

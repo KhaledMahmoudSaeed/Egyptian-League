@@ -6,12 +6,14 @@ import {
   update,
   destroy,
 } from "../controllers/match.controller.js";
+import { auth } from "../middleware/auth.js";
+
 const router = express.Router();
 
 router.get("/", index);
 router.get("/:matchId", show);
-router.post("/", store);
-router.put("/:matchId", update);
-router.delete("/:matchId", destroy);
+router.post("/", auth, store);
+router.put("/:matchId", auth, update);
+router.delete("/:matchId", auth, destroy);
 
 export default router;

@@ -6,6 +6,10 @@ const matchSchema = Joi.object({
   matchDate: Joi.date().required(),
   score: Joi.string().required(),
 });
+
+const idSchema = Joi.string()
+  .regex(/^[0-9a-fA-F]{24}$/)
+  .required();
 import MATCH from "../models/match.model.js";
 import { SUCCESS, FAIL } from "../utilities/successWords.js";
 import { errorHandler } from "../utilities/errorHandler.js";
@@ -39,7 +43,11 @@ export const index = asyncWarper(async (req, res, next) => {
 });
 
 export const show = asyncWarper(async (req, res, next) => {
-  const matchId = req.params.matchId;
+  const { matchId } = req.params;
+  const { error: idError } = idSchema.validate(matchId);
+  if (idError) {
+    return next(errorHandler.create("Invalid match ID format", FAIL, 400));
+  }
   const match = await MATCH.findById(matchId, {
     __v: 0,
     createdAt: 0,
@@ -82,7 +90,11 @@ export const store = asyncWarper(async (req, res, next) => {
 });
 
 export const update = asyncWarper(async (req, res, next) => {
-  const matchId = req.params.matchId;
+  const { matchId } = req.params;
+  const { error: idError } = idSchema.validate(matchId);
+  if (idError) {
+    return next(errorHandler.create("Invalid match ID format", FAIL, 400));
+  }
   const { error, value } = matchSchema.validate(req.body);
   if (error) {
     return next(errorHandler.create(error.details[0].message, FAIL, 400));
@@ -109,7 +121,11 @@ export const update = asyncWarper(async (req, res, next) => {
 });
 
 export const destroy = asyncWarper(async (req, res, next) => {
-  const matchId = req.params.matchId;
+  const { matchId } = req.params;
+  const { error: idError } = idSchema.validate(matchId);
+  if (idError) {
+    return next(errorHandler.create("Invalid match ID format", FAIL, 400));
+  }
   const deletedMatch = await MATCH.findByIdAndDelete(matchId);
   if (!deletedMatch) {
     return next(errorHandler.create("Match not found", FAIL, 404));
