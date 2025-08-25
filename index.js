@@ -2,9 +2,10 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import { FAIL } from "./utilities/successWords.js";
 import teamRouter from "./routes/team.routes.js";
 import matchRouter from "./routes/match.routes.js";
+import userRouter from "./routes/users.routes.js";
+import { invaildRouter, errorDisplay } from "./middleware/routesHanldler.js";
 dotenv.config();
 
 const app = express();
@@ -14,21 +15,10 @@ app.use(express.json());
 
 app.use("/api/teams", teamRouter);
 app.use("/api/matches", matchRouter);
+app.use("/api/users", userRouter);
 // Catch all invalid routes
-app.use((req, res) => {
-  return res.status(404).json({
-    success: FAIL,
-    status: 404,
-    msg: "Invalid Route",
-  });
-});
-app.use((err, req, res, next) => {
-  res.status(err.statusCode || 500).json({
-    status: err.statusCode || 500,
-    success: FAIL,
-    msg: err.message || "Internal Server Error",
-  });
-});
+app.use(invaildRouter);
+app.use(errorDisplay);
 
 mongoose
   .connect(process.env.DB_URL)
